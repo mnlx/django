@@ -79,15 +79,15 @@ WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-##    'default': {
-##        'ENGINE': 'django.db.backends.mysql',
-##        'NAME':'django',
-##        'USER':'mnlx',
-##        'PASSWORD':'Frenetico1',
-##        'HOST':'127.0.0.1',
-##        'PORT' : '3306',
-##	'SOCKET' : '/opt/lampp/var/mysql/mysql.sock',
-##    }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'django',
+        'USER':'mnlx',
+        'PASSWORD':'Frenetico1',
+        'HOST':'127.0.0.1',
+        'PORT' : '3306',
+	'SOCKET' : '/opt/lampp/var/mysql/mysql.sock',
+    }
 }
 
 
