@@ -27,7 +27,7 @@ SECRET_KEY = '!y1l1*g(hqbso%j)6vy0&!j9#7r82_29u%705qa5@347)gc@ov'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dry-ocean-41979.herokuapp.com',]
 LOGIN_URL = '/rango/login/'
 
 # Application definition
