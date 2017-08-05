@@ -1,0 +1,43 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+{% block title_block %}
+Rango
+{%endblock%}
+
+
+{% block body_block %}
+    <h1>Rango</h1>
+    <div class="">
+      <h2 style="color: #3f83a3">This is Rango</h2><br>
+    </div>
+    {% if user.is_authenticated %}
+        howdy {{ user.username }}{{ visits }}
+    {% else %}
+        howdy budyya!1!!
+    {% endif %}
+    <div class="">
+      {% if categories %}
+          <ul>
+            <h2>Most Liked Categories</h2>
+            {% for category in categories  %}
+                <li><a href="{% url 'rango:category' category.slug %}">{{category.name}}</a></li>
+            {% endfor %}
+            <h4><a href="{% url 'rango:add_category'%}">Add a new category</a></h4>
+          </ul>
+
+          <ul>
+            <h2>Most Liked Categories</h2>
+            {% for lk in views  %}
+                <li><a href="{{lk.url}}">{{lk.title}}</a>( Has {{lk.views}} views)</li>
+            {% endfor %}
+          </ul>
+      {% else %}
+        <strong>There are none.</strong>
+      {% endif %}
+    </div>
+
+    <div class="">
+      <a href={% url "rango:about" %}>About</a><br>
+      <img src="{% static "images/samurai.jpg" %}" alt="GAY!" width="400px">
+    </div>
+{%endblock%}
