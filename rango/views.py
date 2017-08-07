@@ -6,25 +6,27 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from datetime import datetime
+
 # Create your views here.
 @login_required
 def index(request):
-    request.session.set_test_cookie()
+    # request.session.set_test_cookie()
     category_list = Category.objects.order_by('-likes')[:5]
     page_likes_list = Page.objects.order_by('-views')[:5]
     page_send = {'categories' : category_list, 'views':page_likes_list}
-    response =  render(request, 'rango/index.html', page_send)
-    visitor_cookie_handler(request,response)
 
 
+
+    # visits_func(request,response)
+    visits_func_session(request)
+    print(request.COOKIES.get('visits'))
+    page_send['visits'] = request.session['visits']
+    response = render(request, 'rango/index.html', page_send)
     return response
 
 @login_required
 def category(request, category_name_slug):
     context_dic ={}
-    if request.session.test_cookie_worked():
-        print('HELL YEAH!')
-        request.session.delete_test_cookie()
     try:
         category = Category.objects.get(name=category_name_slug)
         pages = Page.objects.filter(category=category)
@@ -114,7 +116,7 @@ def register(request):
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
-            profile.save
+            profile.save()
 
             registered = True
 
@@ -164,15 +166,77 @@ def restricted(request):
 
 
 '''HELPER FUNCTIONS'''
+def visits_func(request,response):
+    visits = int(request.COOKIES.get('visits','0'))
+    last_visits_cookie = request.COOKIES.get('last_visit',str(datetime.now())[:-7])
 
-def visitor_cookie_handler(request, response):
-    visits = int(request.COOKIES.get('visits','1'))
+    last_visits = datetime.strptime(last_visits_cookie , '%Y-%m-%d %H:%M:%S')
+    visits += 1
 
-    last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
-    last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
+    if (datetime.now() - last_visits).days>0:
 
-    if(datetime.now() - last_visit_time).days > 0:
+        last_visits = str(datetime.now())
+        response.set_cookie('last_visit',str(datetime.now()))
+    else:
+        response.set_cookie('last_visit', last_visits_cookie)
+
+    response.set_cookie('visits',int(visits))
+
+def get_server_side_cookie(request,cookie,default=None):
+    val = int(request.session.get(cookie))
+    print(val,'this is val')
+    if not val:
+        return default
+    else:
+        return val
+
+
+
+def visits_func_session(request):
+    visits = int(get_server_side_cookie(request,'visits',0))
+    last_visits_cookie = get_server_side_cookie(request,'last_visit',str(datetime.now())[:-7])
+    last_visits = datetime.strptime(last_visits_cookie , '%Y-%m-%d %H:%M:%S')
+    visits += 1
+
+    if (datetime.now() - last_visits).days>0:
+
+        last_visits = str(datetime.now())
+        request.session['last_visit'] = str(datetime.now())
+    else:
+        request.session['last_visit'] = last_visits_cookie
+
+    request.session['visits'] = int(visits)
+
+
+
+
+
+
+
+
+
+
+
+def get_server_side_cookie(request, cookie, default_val=None):
+    val = request.session.get(cookie)
+    if not val:
+        val = default_val
+    return val
+
+def visitor_cookie_handler(request):
+    visits = int(get_server_side_cookie(request,'visits','1'))
+    last_visit_cookie = get_server_side_cookie(request,
+                                               'last_visit',
+                                               str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7],
+                                        '%Y-%m-%d %H:%M:%S')
+
+    if (datetime.now() - last_visit_time).days > 0 :
+        print(visits)
         visits = visits + 1
+        request.session['last_visit'] = str(datetime.now())
+    else:
+        visits=1
+        request.session['last_visit'] = last_visit_cookie
 
-    response.set_cookie('last_visit', str(datetime.now()))
-    response.set_cookie('visits',visits)
+    request.session['visits'] = visits
