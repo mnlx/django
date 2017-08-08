@@ -1,46 +1,47 @@
 <!DOCTYPE html>
-<html>
-  <head>
+{% load static%}
+<head>
     <title>
+
       Rango -
       {% block title_block %}
         How to Tango with Django!
       {% endblock %}
     </title>
+
+        <link rel="stylesheet" href="{% static '/css/base.css' %}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="fluid-container">
+
     {% load rango_template_tags%}
-    <div style="background-color: #000f3a">
+    <div class="main-sidebar">
+
         {%block sidebar_block%}
             {%get_category_list category%}
         {%endblock%}
+
+        <div class="sidebar-lower">
+
+          {% if user.is_authenticated %}
+            <a href="{% url 'auth_logout'%}"><div style="color:red"> Logout</div></a>
+          {% else %}
+            <a href="{% url 'registration_register'%}"><div> Register</a></div>
+            <a href="{% url 'auth_login'%}"> <div> Login</a></div>
+          {% endif %}
+            <a href="{% url 'rango:add_category'%}"> <div>Add New Category</div></a>
+            <a href="{% url 'rango:about'%}">        <div>About</div></a>
+            <a href="{% url 'rango:index'%}">        <div>Home </div></a>
+
+        </div>
     </div>
-{#        <h3>{{ rango_template_tags.hell }}</h3>#}
-    <div>
+
+    <div class="body-block">
       {%block body_block%}
       {%endblock%}
     </div>
-    <hr>
-    <div>
-      <ul>
-          {% if user.is_authenticated %}
-        <li><a href="{% url 'rango:logout'%}"> Logout</a></li>
-              <li><a href="{% url 'rango:restricted'%}"> Restricted</a></li>
-
-          {% else %}
-            <li><a href="{% url 'rango:registration'%}"> register</a></li>
-            <li><a href="{% url 'rango:login'%}"> Login</a></li>
-          {% endif %}
-            <li><a href="{% url 'rango:add_category'%}"> Add New Category</a></li>
-            <li><a href="{% url 'rango:about'%}"> about</a></li>
-            <li><a href="{% url 'rango:index'%}"> index</a></li>
-
-      </ul>
-    </div>
-
-
-          {%block bottombar_block%}
-            {%get_page_list 123%}
-        {%endblock%}
   </body>
 </html>
