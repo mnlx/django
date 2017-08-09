@@ -9,13 +9,13 @@
       {% endblock %}
     </title>
 
-        <link rel="stylesheet" href="{% static '/css/base.css' %}">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="{% static '/js/bootstrap.js' %}"></script>
   </head>
-  <body class="fluid-container">
+  <body >
 
     {% load rango_template_tags%}
     <div class="main-sidebar">
@@ -29,8 +29,8 @@
           {% if user.is_authenticated %}
             <a href="{% url 'auth_logout'%}"><div style="color:red"> Logout</div></a>
           {% else %}
-            <a href="{% url 'registration_register'%}"><div> Register</a></div>
-            <a href="{% url 'auth_login'%}"> <div> Login</a></div>
+            <a href="{% url 'registration_register'%}"><div> Register</div></a>
+            <a href="{% url 'auth_login'%}"> <div> Login</div></a>
           {% endif %}
             <a href="{% url 'rango:add_category'%}"> <div>Add New Category</div></a>
             <a href="{% url 'rango:about'%}">        <div>About</div></a>
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="body-block">
+    <div class="main">
       {%block body_block%}
       {%endblock%}
     </div>
