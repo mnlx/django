@@ -9,12 +9,18 @@
       {% if category %}
           <h1>{{category.name}}</h1>
           {% if pages %}
-              <ul>
+
                 {% for page in pages %}
-                    <li><a href="{{page.url}}">{{page.title}}</a></li>
+                    <div><a href="{{page.url}}">{{page.title}}</a></div>
                 {% endfor %}
 
-              </ul>
+              <div id="like_count">
+                  <strong>{{ category.likes }}</strong>
+                  <button id="likes" class="btn btn-primary btn-sm" type="button" data-catid="{{ category.id }}">
+                      Like
+                  </button>
+              </div>
+
               <br>{{test}}
           {% else %}
             <strong>No pages in this category</strong>
