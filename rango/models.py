@@ -37,5 +37,11 @@ class UserProfile(models.Model):
     website = models.URLField(blank = True)
     picture = models.ImageField(upload_to='profile_image', blank=True)
 
+
+
     def __str__(self):
         return self.user.username
+
+class Friends(models.Model):
+    user = models.ForeignKey(User)
+    friend = User
