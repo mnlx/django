@@ -1,14 +1,14 @@
-<ul>
-    {% if cats %}
-        {% for c in cats %}
-            {%if c == act_cat%}
-                <li><a href="{% url 'rango:category' c.slug %}" style="color:#ff00ca">{{c.name}}</a></li>
 
-            {%else%}
-                <li><a href="{% url 'rango:category' c.slug %}" style="color:#00b7ff">{{c.name}}</a></li>
-            {%endif%}
-        {%endfor%}
-    {%else%}
-        <li><strong>There are no categories</strong></li>
-    {%endif%}
-</ul>
+{% if cats %}
+    {% for c in cats %}
+        {%if c == act_cat%}
+            <a href="{% url 'rango:category' c.slug %}" style="color:#ff00ca"><div class="sidebar-btn">{{c.name}}</div></a>
+
+        {%else%}
+            <a href="{% url 'rango:category' c.slug %}" style="color:#00b7ff"><div class="sidebar-btn">{{c.name}}</div></a>
+        {%endif%}
+    {%endfor%}
+{%else%}
+    <strong>No results</strong>
+
+{%endif%}

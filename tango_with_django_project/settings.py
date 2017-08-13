@@ -27,7 +27,7 @@ SECRET_KEY = '!y1l1*g(hqbso%j)6vy0&!j9#7r82_29u%705qa5@347)gc@ov'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dry-ocean-41979.herokuapp.com',]
+ALLOWED_HOSTS = ['dry-ocean-41979.herokuapp.com','127.0.0.1','0.0.0.0','192.168.1.9']
 LOGIN_URL = '/rango/login/'
 
 # Application definition
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rango',
+    'registration',
+    'conversations',
     ]
 
 MIDDLEWARE = [
@@ -134,3 +136,11 @@ STATIC_URL = '/static/'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+#Registration variables
+
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/rango/'
+LOGIN_URL ='/accounts/login/'
