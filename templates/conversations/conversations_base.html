@@ -1,0 +1,29 @@
+{% extends 'rango/../common/base.html' %}
+{% load static %}
+{% block title_block %}
+Rango
+{%endblock%}
+
+
+{% block secondary_sidebar_base %}
+<div class="secondary-sidebar">
+        <hr>
+    <div id="cats">
+
+        <h4>Friends</h4>
+        <ul>
+        {% for friend in friends %}
+            <li>{{friend}}</li>
+        {% endfor %}
+
+        </ul>
+    </div>
+
+{% block conversations %}
+
+{% endblock %}
+
+
+
+</div>
+{% endblock %}

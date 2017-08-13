@@ -44,4 +44,8 @@ class UserProfile(models.Model):
 
 class Friends(models.Model):
     user = models.ForeignKey(User)
-    friend = User
+    friend = models.IntegerField()
+    blocked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.friend)

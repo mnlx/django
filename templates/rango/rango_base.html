@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block title_block %}
+Rango
+{%endblock%}
+
+
+{% block secondary_sidebar_base %}
+    {% load rango_template_tags%}
+    <div class="main-sidebar">
+
+        <input type="text" class="input-group search-query" name="suggestion" value="" id="suggestion" placeholder="Category">
+
+        <hr>
+
+        <div id="cats">
+            Placeholder
+        </div>
+    </div>
+{% endblock %}
+
+
+

@@ -1,6 +1,6 @@
 .main-sidebar{
    position:fixed;
-    padding-left: 0px;
+    padding-left: 10px;
     left: 0px;
     top: 0px;
    width:200px;
@@ -13,7 +13,7 @@
     margin-top: 100px;
 }
 .main{
-    margin-left: 200px;
+    margin-left: 405px;
 }
 
 
@@ -51,7 +51,16 @@ div.sidebar-lower a div{
     font-size: 11px;
 }
 
-.test{
+.secondary-sidebar{
+    position:fixed;
+    padding-left: 10px;
+    left: 200px;
+    top: 0px;
+   width:200px;
+   height:100%;
+   background-color: rgb(0, 109, 116);
+   box-shadow: 0px 0px 2px #000000;
+    z-index: 1;
 
 }
 
