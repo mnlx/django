@@ -1,0 +1,45 @@
+{% extends 'rango/../common/base.html' %}
+{% load static %}
+
+{% block title_block %}
+
+Rango
+{%endblock%}
+
+
+{% block secondary_sidebar_base %}
+    <script src="{% static '/js/conversations/add_friends.js' %}"></script>
+<div class="secondary-sidebar">
+        <hr>
+    <div id="cats">
+
+        <h4>Friends</h4>
+        <ul>
+        {% if friends %}
+            {% for friend in friends %}
+                <li>{{friend}}</li>
+            {% endfor %}
+        {% else %}
+            <p>No Friends Yet</p>
+        {% endif %}
+
+
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block body_block %}
+
+        {% for usr in users %}
+
+{#            <input type="hidden" name="id" value="{{ user.id }}">#}
+            <div>{{ usr.username }}</div>
+            <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-primary btn-friends">Add
+            </button>
+        {% endfor %}
+
+
+{% endblock %}
+

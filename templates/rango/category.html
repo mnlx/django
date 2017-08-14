@@ -1,20 +1,37 @@
-{% extends 'rango/base.html' %}
+{% extends 'rango/../common/base.html' %}
 {% load static %}
 {% block title_block %}
     {{category.name}}
 {%endblock%}
 
+
+
+
+
+
+        <input type="text" class="input-group search-query" name="suggestion" value="" id="suggestion" placeholder="Category">
+
+        <hr>
+
+
 {% block body_block %}
+    {{ user.username }}
     <div class="">
       {% if category %}
           <h1>{{category.name}}</h1>
           {% if pages %}
-              <ul>
+
                 {% for page in pages %}
-                    <li><a href="{{page.url}}">{{page.title}}</a></li>
+                    <div><a href="{{page.url}}">{{page.title}}</a></div>
                 {% endfor %}
 
-              </ul>
+              <div id="like_count">
+                  <strong>{{ category.likes }}</strong>
+                  <button id="likes" class="btn btn-primary btn-sm" type="button" data-catid="{{ category.id }}">
+                      Like
+                  </button>
+              </div>
+
               <br>{{test}}
           {% else %}
             <strong>No pages in this category</strong>
@@ -23,5 +40,17 @@
           The specified category doesn't exist
       {% endif %}
 
+    </div>
+{% endblock %}
+
+{% block secondary_sidebar_base %}
+    <div class="secondary-sidebar">
+        <input type="text" class="input-group search-query" name="suggestion" value="" id="suggestion" placeholder="Category">
+
+        <hr>
+
+        <div  id="cats" class="cats">
+
+        </div>
     </div>
 {% endblock %}
