@@ -4,8 +4,18 @@
     {{category.name}}
 {%endblock%}
 
+
+
+
+
+
+        <input type="text" class="input-group search-query" name="suggestion" value="" id="suggestion" placeholder="Category">
+
+        <hr>
+
+
 {% block body_block %}
-    {{ user.username\ }}
+    {{ user.username }}
     <div class="">
       {% if category %}
           <h1>{{category.name}}</h1>
@@ -30,5 +40,17 @@
           The specified category doesn't exist
       {% endif %}
 
+    </div>
+{% endblock %}
+
+{% block secondary_sidebar_base %}
+    <div class="secondary-sidebar">
+        <input type="text" class="input-group search-query" name="suggestion" value="" id="suggestion" placeholder="Category">
+
+        <hr>
+
+        <div  id="cats" class="cats">
+
+        </div>
     </div>
 {% endblock %}

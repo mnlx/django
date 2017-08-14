@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from rango.models import Category, Page
+from rango.models import Category, Page, User
 
 def populate():
 # First, we will create lists of dictionaries containing the pages
@@ -72,6 +72,14 @@ def add_cat(name):
     c.save()
     return c
 # Start execution here!
+
+def create_users():
+    import names
+    for i in range(100):
+        User.objects.create_user(names.get_last_name(),password="Frenetico1").save()
+
+
 if __name__ == '__main__':
     print("Starting Rango population script...")
-    populate()
+    # populate()
+    create_users()

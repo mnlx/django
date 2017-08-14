@@ -15,11 +15,18 @@
     <script src="{% static '/js/bootstrap.js' %}"></script>
     <script src="{% static '/js/jquery-rango.js' %}"></script>
   </head>
+
   <body >
 
 
-    {% block secondary_sidebar_base %}
-    {% endblock %}
+    <div class="main-sidebar">
+        <div class="site-navigation">
+            <ul>
+                <li><a href="{% url 'conversations:index' %}">Conversations</a></li>
+                <li><a href="{% url 'rango:index' %}">Rango</a></li>
+            </ul>
+        </div>
+
 
 
         <div class="sidebar-lower">
@@ -34,13 +41,10 @@
             <a href="{% url 'rango:about'%}">        <div>About</div></a>
             <a href="{% url 'rango:index'%}">        <div>Home </div></a>
         </div>
+    </div>
 
-
-
-
-
-
-
+    {% block secondary_sidebar_base %}
+    {% endblock %}
 
     <div class="main">
       {%block body_block%}

@@ -82,15 +82,21 @@ WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'django',
-        'USER':'mnlx',
-        'PASSWORD':'Frenetico1',
-        'HOST':'127.0.0.1',
-        'PORT' : '3306',
-	'SOCKET' : '/opt/lampp/var/mysql/mysql.sock',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
+
+    #  INSERIR em databases para ativar MySQL
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME':'django',
+    #     'USER':'mnlx',
+    #     'PASSWORD':'Frenetico1',
+    #     'HOST':'127.0.0.1',
+    #     'PORT' : '3306',
+    # 'SOCKET' : '/opt/lampp/var/mysql/mysql.sock',
+    # }
 
 
 # Password validation

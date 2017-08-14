@@ -48,4 +48,4 @@ class Friends(models.Model):
     blocked = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.friend)
+        return str(User.objects.get( pk = int(self.friend)))
