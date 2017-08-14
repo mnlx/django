@@ -8,6 +8,7 @@ Rango
 
 
 {% block secondary_sidebar_base %}
+    <link rel="stylesheet" href="{% static '/css/conversations/friends.css' %}">
     <script src="{% static '/js/conversations/add_friends.js' %}"></script>
 <div class="secondary-sidebar">
         <hr>
@@ -31,14 +32,25 @@ Rango
 {% endblock %}
 
 {% block body_block %}
+        {% for usr in friends %}
+            <div class="row">
+                <span class="offset-1 col-md-2 friends-name">{{ usr.username }}</span>
+                <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-primary btn-friends  col-md-2">Remove
+                </button>
+            </div>
 
-        {% for usr in users %}
-
-{#            <input type="hidden" name="id" value="{{ user.id }}">#}
-            <div>{{ usr.username }}</div>
-            <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-primary btn-friends">Add
-            </button>
         {% endfor %}
+    <hr>
+        {% for usr in not_friends %}
+            <div class="row">
+                <span class="offset-1 col-md-2 friends-name">{{ usr.username }}</span>
+                <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-primary btn-not-friends">Add
+                </button>
+            </div>
+
+        {% endfor %}
+
+
 
 
 {% endblock %}
