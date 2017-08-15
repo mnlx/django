@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^friends/$', views.friends, name='friends'),
     url(r'^add_friends/$', views.add_friends, name='add_friends'),
     url(r'^remove_friends/$', views.remove_friends, name='remove_friends'),
+    url(r'^messages/', views.messages, name='messages')
 
 ]

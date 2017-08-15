@@ -2,12 +2,15 @@
     background-color: #72000f;
     border-color: #72000f;
     color: #e2eaf2;
-    margin: 3px;
+    /*margin: 3px;*/
+    height: 20px;
+    width: 20px;
 }
 
 .friends-name{
     font-size: 18px;
     text-align: center;
+    color: #767676;
 }
 
 
@@ -16,5 +19,16 @@
     background-color: #049100;
     border-color: #049100;
     color: #e2eaf2;
-    margin: 3px;
+    /*margin: 3px;*/
+    /*height: 20px;*/
+    height: 20px;
+    width: 20px;
+}
+
+.not-friends-col{
+    border-left: 1px rgba(77, 81, 83, 0.43) solid;
+}
+
+.row-friends{
+    height: 20px;
 }

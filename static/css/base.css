@@ -13,7 +13,10 @@
     margin-top: 100px;
 }
 .main{
-    margin-left: 405px;
+    margin-left: 400px;
+    background-color: #1d1e1f;
+    height: 100%;
+    min-height: 1000px;
 }
 
 
@@ -64,6 +67,6 @@ div.sidebar-lower a div{
 
 }
 
-.test2{
+body {
 
 }

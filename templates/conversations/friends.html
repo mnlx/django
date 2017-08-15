@@ -32,25 +32,33 @@ Rango
 {% endblock %}
 
 {% block body_block %}
-        {% for usr in friends %}
-            <div class="row">
-                <span class="offset-1 col-md-2 friends-name">{{ usr.username }}</span>
-                <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-primary btn-friends  col-md-2">Remove
-                </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% for usr in friends %}
+                    <div class="row row-friends">
+                        <span class="col-md-3 friends-name">{{ usr.username }}</span>
+                        <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-sm rounded-circle btn-friends">
+                        </button>
+                    </div>
+
+                {% endfor %}
             </div>
+            <div class="col-md-6 not-friends-col">
 
-        {% endfor %}
-    <hr>
-        {% for usr in not_friends %}
-            <div class="row">
-                <span class="offset-1 col-md-2 friends-name">{{ usr.username }}</span>
-                <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-primary btn-not-friends">Add
-                </button>
+                {% for usr in not_friends %}
+                    <div class="row row-friends">
+
+                        <span class="col-md-3 friends-name">{{ usr.username }}</span>
+                        <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-sm rounded-circle btn-not-friends">
+                        </button>
+                    </div>
+
+                {% endfor %}
+
             </div>
-
-        {% endfor %}
-
-
+        </div>
+    </div>
 
 
 {% endblock %}

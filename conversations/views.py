@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse
 from rango.models import User
 from conversations.models import Conversations
+from .forms import ConversationsForm
 # Create your views here.
 def conversations(request):
 
@@ -54,3 +55,10 @@ def remove_friends(request):
         user.friends_set.get_or_create(friend = friend_id)[0].delete()
 
     return HttpResponse('teehee')
+
+def messages(request):
+    form = ConversationsForm
+    if request.method == 'POST':
+        form = ConversationsForm(request.POST)
+
+    return render(request, 'conversations/messages.html', {'form':form})
