@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import Test, Category, Page
-from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
-from django.contrib.auth import authenticate,login,logout
+from .models import  Category, Page
+from .forms import CategoryForm, PageForm
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from datetime import datetime
 
 # Create your views here.

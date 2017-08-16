@@ -2,9 +2,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
-class Test(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -33,7 +30,7 @@ class Page(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-
+    is_online = models.BooleanField(default=False)
     website = models.URLField(blank = True)
     picture = models.ImageField(upload_to='profile_image', blank=True)
 
@@ -45,7 +42,11 @@ class UserProfile(models.Model):
 class Friends(models.Model):
     user = models.ForeignKey(User)
     friend = models.IntegerField()
-    blocked = models.BooleanField(default=False)
+
+    is_blocked = models.BooleanField(default=False)
+
+
+
 
     def __str__(self):
         return str(User.objects.get( pk = int(self.friend)))

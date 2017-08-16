@@ -7,6 +7,14 @@ class Messages(models.Model):
     mtm = models.ManyToManyField(User)
     text = models.CharField(max_length=100)
 
+    def add_2(self,text, *args, **kwargs):
+        # Force to add only two people per message
+        print(args)
+        self.mtm.add(args[0])
+        self.mtm.add(args[1])
+        self.text = text
+        super(Messages, self).save(*args, **kwargs)
+
 class Conversations(models.Model):
 
 

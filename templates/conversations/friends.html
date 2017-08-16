@@ -8,50 +8,70 @@ Rango
 
 
 {% block secondary_sidebar_base %}
-    <link rel="stylesheet" href="{% static '/css/conversations/friends.css' %}">
-    <script src="{% static '/js/conversations/add_friends.js' %}"></script>
+
+<link rel="stylesheet" href="{% static '/css/conversations/friends.css' %}">
+<script src="{% static '/js/conversations/add_friends.js' %}"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
 <div class="secondary-sidebar">
-        <hr>
+
     <div id="cats">
 
-        <h4>Friends</h4>
-        <ul>
+        <h4>Your Friends</h4>
+
         {% if friends %}
             {% for friend in friends %}
-                <li>{{friend}}</li>
+                <a class="waves-block waves-effect waves-light secondary-sidebar-friends ">
+                    <i class="material-icons secondary-sidebar-friends-icon">group</i><span class="">{{friend}}</span>
+                </a>
             {% endfor %}
         {% else %}
             <p>No Friends Yet</p>
         {% endif %}
 
 
-        </ul>
+
     </div>
 </div>
 
 {% endblock %}
 
 {% block body_block %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col m4">
+                <h2>Friends</h2>
+                <hr>
                 {% for usr in friends %}
                     <div class="row row-friends">
-                        <span class="col-md-3 friends-name">{{ usr.username }}</span>
-                        <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-sm rounded-circle btn-friends">
-                        </button>
+
+                        <div class="col m3">
+                        <a name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="waves-light btn btn-friends center">
+                            <i class="material-icons">cancel</i>
+                        </a>
+                        </div>
+
+                        <div class="col m5 friends-name">{{ usr.username }}</div>
+
                     </div>
 
                 {% endfor %}
             </div>
-            <div class="col-md-6 not-friends-col">
-
+            <div class="col m4 not-friends-col">
+                <h2>Add Friends</h2>
                 {% for usr in not_friends %}
                     <div class="row row-friends">
 
-                        <span class="col-md-3 friends-name">{{ usr.username }}</span>
-                        <button name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class="btn btn-sm rounded-circle btn-not-friends">
-                        </button>
+
+                        <div class="col m3">
+                        <a name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class=" waves-effect waves-light btn s4 btn-not-friends">
+                            <i class="material-icons">add_box</i>
+                        </a>
+                        </div>
+
+                        <div class="col m5 friends-name">{{ usr.username }}</div>
                     </div>
 
                 {% endfor %}
