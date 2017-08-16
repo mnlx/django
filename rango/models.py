@@ -41,7 +41,7 @@ class UserProfile(models.Model):
 
 class Friends(models.Model):
     user = models.ForeignKey(User)
-    friend = models.IntegerField()
+    friend_id = models.IntegerField()
 
     is_blocked = models.BooleanField(default=False)
 

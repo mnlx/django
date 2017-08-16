@@ -19,7 +19,7 @@ def friends(request):
     list_friends = request.user.friends_set.all()
     list_friends_id = []
     for i in list_friends:
-        list_friends_id.append(i.friend)
+        list_friends_id.append(i.friend_id)
 
     list_friends = User.objects.filter(id__in =list_friends_id )
 
@@ -40,7 +40,7 @@ def add_friends(request):
 
         if friend_id == user_id:
             return HttpResponse('Forget about it')
-        user.friends_set.get_or_create(friend = friend_id).save()
+        user.friends_set.get_or_create(friend_id = friend_id).save()
 
     return HttpResponse('teehee')
 

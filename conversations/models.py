@@ -6,14 +6,21 @@ from datetime import datetime
 class Messages(models.Model):
     mtm = models.ManyToManyField(User)
     text = models.CharField(max_length=100)
+    pub_date = models.DateField()
 
-    def add_2(self,text, *args, **kwargs):
+
+    def add(self,text, *args, **kwargs):
         # Force to add only two people per message
-        print(args)
-        self.mtm.add(args[0])
-        self.mtm.add(args[1])
+        print('Added both to base')
+
+        self.mtm.add(args[0],args[1])
         self.text = text
-        super(Messages, self).save(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.pub_date = datetime.now()
+        super(Messages, self).save()
+
+
 
 class Conversations(models.Model):
 
