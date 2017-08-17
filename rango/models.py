@@ -42,6 +42,10 @@ class UserProfile(models.Model):
 class Friends(models.Model):
     user = models.ForeignKey(User)
     friend_id = models.IntegerField()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 194f9d6d6438f47137d918ec809a4a173b5cb045
     is_blocked = models.BooleanField(default=False)
 
     def __str__(self):
