@@ -10,9 +10,9 @@ def conversations(request):
     friends_name_list =[]
     for friend in friends:
 
-        if friend.friend != 0:
-            friends_name_list.append( User.objects.get(pk=int(friend.friend)).username )
-            print(User.objects.get(pk=int(friend.friend)).username)
+        if friend.friend_id != 0:
+            friends_name_list.append( User.objects.get(pk=int(friend.friend_id)).username )
+            print(User.objects.get(pk=int(friend.friend_id)).username)
     return render(request, 'conversations/conversations_base.html', {'friends':friends_name_list})
 
 def friends(request):
