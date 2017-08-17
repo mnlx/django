@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from rango.models import User
-from conversations.models import Conversations
+
 from .forms import ConversationsForm
 # Create your views here.
 def conversations(request):

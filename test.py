@@ -2,10 +2,13 @@ import os
 import random
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 'tango_with_django_project.settings')
-
+import random
 import django
 django.setup()
 from rango.models import Category, Page, User
+from conversations.models import *
+
+
 
 def populate():
 # First, we will create lists of dictionaries containing the pages
@@ -73,13 +76,45 @@ def add_cat(name):
     return c
 # Start execution here!
 
-def create_users():
+def create_users(*number):
     import names
-    for i in range(100):
-        User.objects.create_user(names.get_last_name(),password="Frenetico1").save()
+    for i in range(number[0]):
+        lname= names.get_last_name()
+        fname = names.get_first_name()
+        User.objects.create_user(username= fname+'_'+ lname +str(random.randrange(1,99)),password="Frenetico1",first_name=fname,last_name=lname).save()
+        print('User created:' + fname + ' ' + lname)
 
+def make_friends(*number):
+
+
+
+
+    for usr in User.objects.all():
+        r_l = random.sample(range(1, User.objects.all().count() + 1), User.objects.all().count())
+        count = User.objects.all().count()
+        for i in r_l[1:round(count*random.random())]:
+            print(usr.username + str(i))
+            if i != usr.id:
+                frd = Friends.objects.create(friend_id = i,is_blocked = round(random.random()),user = usr)
+                frd.save()
+
+
+def messaging(*number):
+
+    for usr in User.objects.all():
+
+        for frd in usr.friends_set.all():
+            text = "Lorem"
+
+
+            for i in range(random.randrange(1,1000)):
+                msg = Messages.objects.create(pub_date = datetime.date(2000+random.randrange(1,17),random.randrange(1,12),random.randrange(1,25)))
+                msg.mtm.add(text,usr,frd)
+                msg.save()
 
 if __name__ == '__main__':
     print("Starting Rango population script...")
     # populate()
-    create_users()
+    # create_users(500)
+    # make_friends()
+    messaging()
