@@ -10,6 +10,14 @@ from conversations.models import *
 
 
 
+s_nouns = ["A dude", "My mom", "The king", "Some guy", "A cat with rabies", "A sloth", "Your homie", "This cool guy my gardener met yesterday", "Superman"]
+p_nouns = ["These dudes", "Both of my moms", "All the kings of the world", "Some guys", "All of a cattery's cats", "The multitude of sloths living under your bed", "Your homies", "Like, these, like, all these people", "Supermen"]
+s_verbs = ["eats", "kicks", "gives", "treats", "meets with", "creates", "hacks", "configures", "spies on", "retards", "meows on", "flees from", "tries to automate", "explodes"]
+p_verbs = ["eat", "kick", "give", "treat", "meet with", "create", "hack", "configure", "spy on", "retard", "meow on", "flee from", "try to automate", "explode"]
+infinitives = ["to make a pie.", "for no apparent reason.", "because the sky is green.", "for a disease.", "to be able to make toast explode.", "to know more about archeology."]
+
+def sing_sen_maker():
+    return random.choice(s_nouns), random.choice(s_verbs), random.choice(s_nouns).lower() or random.choice(p_nouns).lower(), random.choice(infinitives)
 def populate():
 # First, we will create lists of dictionaries containing the pages
 # we want to add into each category.
@@ -98,23 +106,47 @@ def make_friends(*number):
                 frd = Friends.objects.create(friend_id = i,is_blocked = round(random.random()),user = usr)
                 frd.save()
 
+import time
+
+def strTimeProp(start, end, format, prop):
+    """Get a time at a proportion of a range of two formatted times.
+
+    start and end should be strings specifying times formated in the
+    given format (strftime-style), giving an interval [start, end].
+    prop specifies how a proportion of the interval to be taken after
+    start.  The returned time will be in the specified format.
+    """
+
+    stime = time.mktime(time.strptime(start, format))
+    etime = time.mktime(time.strptime(end, format))
+
+    ptime = stime + prop * (etime - stime)
+
+    return time.strftime(format, time.localtime(ptime))
+
+
+def randomDate(start, end, prop):
+    return strTimeProp(start, end, '%m/%d/%Y %I:%M %p', prop)
+
 
 def messaging(*number):
 
     for usr in User.objects.all():
 
         for frd in usr.friends_set.all():
-            text = "Lorem"
 
+            print(int(frd.friend_id))
 
             for i in range(random.randrange(1,1000)):
-                msg = Messages.objects.create(pub_date = datetime.date(2000+random.randrange(1,17),random.randrange(1,12),random.randrange(1,25)))
-                msg.mtm.add(text,usr,frd)
+                text = ''.join(sing_sen_maker())
+                msg = Messages.objects.create(pub_date = randomDate("1/1/2008 1:30 PM", "1/1/2009 4:50 AM", random.random()))
+                print(str(text), usr,User.objects.get(pk = int(frd.friend_id)))
+                msg.add(str(text),usr,User.objects.get(pk = int(frd.friend_id)))
                 msg.save()
 
 if __name__ == '__main__':
     print("Starting Rango population script...")
     # populate()
-    # create_users(500)
+    # create_users(20)
     # make_friends()
     messaging()
