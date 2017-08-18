@@ -42,8 +42,15 @@ class UserProfile(models.Model):
 class Friends(models.Model):
     user = models.ForeignKey(User)
     friend_id = models.IntegerField()
-
     is_blocked = models.BooleanField(default=False)
 
     def __str__(self):
         return str(User.objects.get( pk = int(self.friend)))
+
+class Userremove(models.Model):
+    groupone = models.CharField(null=True, max_length=50)
+class Useradd(Userremove):
+    grouptwo = models.CharField(null=True, max_length=50)
+
+
+

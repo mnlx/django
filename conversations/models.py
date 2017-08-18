@@ -24,12 +24,6 @@ class Messages(models.Model):
     class Meta:
         order_with_respect_to = 'pub_date'
 
-class Conversations(models.Model):
-
-
-    message = models.CharField(max_length=144)
-    users = models.ForeignKey(Friends, default=None)
-    date = models.DateField(default=None)
 
 class MessageStats(models.Model):
 
