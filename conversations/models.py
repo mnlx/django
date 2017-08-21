@@ -3,12 +3,29 @@ from rango.models import User,Friends
 from datetime import datetime
 # Create your models here.
 
+class Searchy(models.Manager):
+    def countin(self):
+        from django.db import connection
+
+        with connection.cursor() as cursor:
+            cursor.execute("""
+            SELECT m.text
+            FROM conversations_messages m
+            WHERE m.id > 40
+            GROUP BY m.id
+            ORDER BY m.pub_date            
+            """)
+
+            return(cursor.fetchall())
+
+
 class Messages(models.Model):
     mtm = models.ManyToManyField(User)
     text = models.CharField(max_length=1000)
     pub_date = models.DateField(null=True)
     sender_id = models.IntegerField(null=True)
 
+    objects = Searchy()
 
     def add(self,text, *args, **kwargs):
         # Force to add only two people per message
@@ -23,6 +40,8 @@ class Messages(models.Model):
 
     class Meta:
         order_with_respect_to = 'pub_date'
+
+
 
 
 class MessageStats(models.Model):
