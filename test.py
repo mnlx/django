@@ -95,8 +95,6 @@ def create_users(*number):
 def make_friends(*number):
 
 
-
-
     for usr in User.objects.all():
         r_l = random.sample(range(1, User.objects.all().count() + 1), User.objects.all().count())
         count = User.objects.all().count()
@@ -141,7 +139,7 @@ def messaging(*number):
                 text = ''.join(sing_sen_maker())
                 msg = Messages.objects.create(pub_date = randomDate("1/1/2008 1:30 PM", "1/1/2009 4:50 AM", random.random()))
                 print(str(text), usr,User.objects.get(pk = int(frd.friend_id)))
-                msg.add(str(text),usr,User.objects.get(pk = int(frd.friend_id)))
+                msg.add(str(text),usr,User.objects.get(pk = frd.friend_id))
                 msg.save()
 
 if __name__ == '__main__':
