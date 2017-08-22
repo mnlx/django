@@ -1,6 +1,7 @@
 from django.db import models
 from rango.models import User,Friends
 from datetime import datetime
+
 # Create your models here.
 
 class Searchy(models.Manager):
@@ -33,9 +34,11 @@ class Messages(models.Model):
 
         self.mtm.add(args[0],args[1])
         self.text = text
+        if kwargs['sender']:
+            self.sender_id = kwargs['sender']
 
     def save(self, *args, **kwargs):
-        self.pub_date = datetime.now()
+        # self.pub_date = datetime.now()
         super(Messages, self).save()
 
     class Meta:

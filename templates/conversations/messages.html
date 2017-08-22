@@ -1,7 +1,14 @@
-<form action="{% url 'rango:add_category' %}" method="post">
+<form action="{% url 'conversations:messages' %}" method="post">
     {% csrf_token %}
 <div>
-    {{ form.as_table }}
+    {{ form.as_p }}
 </div>
     <input type="submit" value="Submit">
+
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+            {% if field.errors %}
+            <span>{{ field.errors|striptags }}</span>
+        {% endif %}
 </form>

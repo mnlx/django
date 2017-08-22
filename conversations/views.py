@@ -1,8 +1,10 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from rango.models import User
-
-from .forms import ConversationsForm
+from django.core.urlresolvers import reverse
+from .forms import MessagesForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required
 def conversations(request):
 
     # conv = Conversations.objects.get(pk=1)
@@ -13,8 +15,8 @@ def conversations(request):
         if friend.friend_id != 0:
             friends_name_list.append( User.objects.get(pk=int(friend.friend_id)).username )
             print(User.objects.get(pk=int(friend.friend_id)).username)
-    return render(request, 'conversations/conversations_base.html', {'friends':friends_name_list})
-
+    return render(request, 'conversations/friends.html', {'friends':friends_name_list})
+@login_required
 def friends(request):
     list_friends = request.user.friends_set.all()
     list_friends_id = []
@@ -29,7 +31,7 @@ def friends(request):
         return HttpResponse(request.POST['id'])
     return render(request, 'conversations/friends.html', {'not_friends':list_friends_excluded,
                                                           'friends': list_friends})
-
+@login_required
 def add_friends(request):
 
     # cat_id = None
@@ -57,8 +59,18 @@ def remove_friends(request):
     return HttpResponse('teehee')
 
 def messages(request):
-    form = ConversationsForm
+    form = MessagesForm()
     if request.method == 'POST':
-        form = ConversationsForm(request.POST)
+        print('psoted')
+        form = MessagesForm(request.POST)
+        # form.mtm.add(request.user)
+
+        print(form)
+
+        a = form.save()
+        a.add('sds',User.objects.get(pk=1),User.objects.get(pk=2),sender=1)
+        a.save()
+        print(form.errors)
+        return HttpResponseRedirect(reverse('conversations:messages'))
 
     return render(request, 'conversations/messages.html', {'form':form})

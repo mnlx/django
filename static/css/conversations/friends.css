@@ -1,33 +1,20 @@
-.btn-friends{
+/*.friends-col{*/
+    /*padding: 100px;*/
+/*}*/
+
+.btn-friends:hover{
+    cursor: pointer;
 }
 
-.friends-name{
+.btn-friends i{
+    vertical-align: middle;
     font-size: 15px;
-    text-align: center;
-    color: #2c2c2c;
-}
-
-
-
-.btn-not-friends{
 
 }
 
-.not-friends-col{
-    border-left: 1px rgba(77, 81, 83, 0.43) solid;
-}
 
-.row-friends{
-    /*height: 15px;*/
-    margin: 3px;
-    /*padding-top: 2px;*/
-}
-
-.secondary-sidebar-friends{
-    padding-left:10%;
-}
-
-.secondary-sidebar-friends-icon{
-    margin-bottom: -10px;
-    /*width: 70%;*/
+.btn-friends {
+    font-size: 14px;
+  display: inline-block;
+    /*margin: 1em;*/
 }
