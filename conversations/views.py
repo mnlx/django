@@ -3,6 +3,7 @@ from rango.models import User
 from django.core.urlresolvers import reverse
 from .forms import MessagesForm
 from django.contrib.auth.decorators import login_required
+import datetime
 # Create your views here.
 @login_required
 def conversations(request):
@@ -59,9 +60,12 @@ def remove_friends(request):
     return HttpResponse('teehee')
 
 def messages(request):
+
     form = MessagesForm()
+    # form.css_classes(extra_classes=['test'])
+    # print(form.cleaned_data)
     if request.method == 'POST':
-        print('psoted')
+        print('posted')
         form = MessagesForm(request.POST)
         # form.mtm.add(request.user)
 

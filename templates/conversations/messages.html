@@ -1,14 +1,23 @@
+{% extends "rango/../common/base.html" %}
+{% load static %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/css/conversations/friends.css' %}">
+{% endblock %}
+
+{% block body_block %}
 <form action="{% url 'conversations:messages' %}" method="post">
     {% csrf_token %}
-<div>
-    {{ form.as_p }}
-</div>
-    <input type="submit" value="Submit">
+<table >
 
-    {% for hidden in form.hidden_fields %}
-        {{ hidden }}
+    {% for a in form %}
+        {{ a }}
     {% endfor %}
-            {% if field.errors %}
-            <span>{{ field.errors|striptags }}</span>
-        {% endif %}
+</table>
+    <input type="submit" value="Submit" class="">
+
+{{ form.as_table }}
+
 </form>
+{% endblock %}
