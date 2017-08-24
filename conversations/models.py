@@ -1,6 +1,6 @@
 from django.db import models
 from rango.models import User,Friends
-from datetime import datetime
+import datetime
 
 # Create your models here.
 
@@ -38,7 +38,7 @@ class Messages(models.Model):
             self.sender_id = kwargs['sender']
 
     def save(self, *args, **kwargs):
-        # self.pub_date = datetime.now()
+        self.pub_date = datetime.date.today()
         super(Messages, self).save()
 
     class Meta:

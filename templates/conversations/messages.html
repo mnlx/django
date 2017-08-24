@@ -7,29 +7,56 @@
     <script>
   $(document).ready(function() {
     $('select').material_select();
+
+    $('.friends-container li').click( function(){
+
+        a = $(this).children()[0].value;
+        console.log(a);
+        $('input#friend_id')[0].value = a;
+    });
   });
             </script>
 {% endblock %}
 
 {% block body_block %}
+    <h3>{{ user.username|capfirst }}</h3>
+   <h3>{{ user.username|length }}</h3>
+    <h5>Messages</h5>
+    <ul class="friends-container">
+{% for friend in friends %}
+
+    <li >{{ friend.first_name }}<input type="hidden" hidden="hidden" value="{{ friend.id }}"> </li>
+
+{% endfor %}
+    </ul>
+
+
 <form action="{% url 'conversations:messages' %}" method="post">
     {% csrf_token %}
-<table >
+    <input id="friend_id" type="hidden" name="friend_id" hidden="hidden" value="{{ friends.0.id }}">
 
-    {% for a in form %}
-        {{ a }}
+    {% for elem in form %}
+        <div class="row">
+            {% if elem.html_name == 'text' %}
+                <div class="input-field">
+                    {{ elem.errors }}
+                    {{ elem.label_tag }}
+                    <textarea name="{{ elem.html_name }}" rows="10" maxlength="1000" required="" cols="40" id="id_text" class="materialize-textarea"></textarea>
+                </div>
+
+            {% endif %}
+        </div>
     {% endfor %}
-</table>
     <input type="submit" value="Submit" class="">
+    {{ form.non_field_errors }}
 </form>
-
-    <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
-  </div>
+{% block gogogo %}
+    <h3>Not Working</h3>
 {% endblock %}
+
+{% endblock %}
+
+
+
+
+

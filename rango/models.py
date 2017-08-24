@@ -45,7 +45,7 @@ class Friends(models.Model):
     is_blocked = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(User.objects.get( pk = int(self.friend)))
+        return str(User.objects.get( pk = int(self.friend_id)))
 
 class Userremove(models.Model):
     groupone = models.CharField(null=True, max_length=50)

@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
-from rango.models import User
+from rango.models import User,Friends
 from django.core.urlresolvers import reverse
 from .forms import MessagesForm
 from django.contrib.auth.decorators import login_required
@@ -60,21 +60,24 @@ def remove_friends(request):
     return HttpResponse('teehee')
 
 def messages(request):
+    frd_lst = [i.friend_id for i in request.user.friends_set.all()]
+    friends = User.objects.filter(pk__in=frd_lst)
 
     form = MessagesForm()
-    # form.css_classes(extra_classes=['test'])
-    # print(form.cleaned_data)
+
     if request.method == 'POST':
-        print('posted')
+
         form = MessagesForm(request.POST)
-        # form.mtm.add(request.user)
 
-        print(form)
+        if form.is_valid():
+            data = form.cleaned_data
+            a = form.save()
+            # print(request.user)
+            # print(request.POST['friends'])
+            a.add(data['text'],request.user,User.objects.get(pk=request.POST['friend_id']),sender=1)
+            a.save()
 
-        a = form.save()
-        a.add('sds',User.objects.get(pk=1),User.objects.get(pk=2),sender=1)
-        a.save()
-        print(form.errors)
-        return HttpResponseRedirect(reverse('conversations:messages'))
+            return HttpResponseRedirect(reverse('conversations:messages'))
 
-    return render(request, 'conversations/messages.html', {'form':form})
+    form['text'].label = 'Message'
+    return render(request, 'conversations/extend.html', {'form':form , 'friends':friends[:6]})
