@@ -4,11 +4,10 @@ $(document).ready(
             function(){
                 friend_id = $(this).attr("friendid");
                 user_id = $(this).attr("userid");
-		console.log(2);
+
                 $.get(
                     '/conversations/ajax/add_friends/',
-                    
-			{'friend_id' : friend_id,
+                    {'friend_id' : friend_id,
                     'user_id':user_id},
                     function(data){
                         $(this).html('test');
