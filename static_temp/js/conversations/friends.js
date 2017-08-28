@@ -6,7 +6,7 @@ $(document).ready(
 
                 $.get(
                     "{% url 'ajax:add_friends' %}",
-                    
+
                     {'friend_id' : friend_id,
                             'user_id':user_id},
                             function(data){
@@ -19,17 +19,17 @@ $(document).ready(
         $('.btn-not-friends').click(
             function(){
                 console.log('removed');
-                friend_id = $(this).attr("friendid");
-                user_id = $(this).attr("userid");
-
+                friend_id = $(this).parent().children('#friend-id')[0].value;
+                // user_id = $(this).attr("userid");
+                console.log(friend_id);
                 $.get(
-                    "{% url 'ajax:remove_friends' %}",
+                    '/conversations/ajax/remove_friends',
                     {'friend_id' : friend_id,
-                    'user_id':user_id},
+                    },
                     function(data){
                         $(this).html('test');
                     });
-
+                console.log('removed3');
 
             });
         });

@@ -5,6 +5,8 @@
 {% block head %}
     <link rel="stylesheet" href="{% static '/css/conversations/friends.css' %}">
    <script src="{% static '/js/conversations/friends.js' %}"></script>
+{#    <script src="{% static '/js/jQuery.js' %}"></script>#}
+{#    <script src="{% static '/js/jQuery.js' %}"></script>#}
 {% endblock %}
 
 {% block title_block %}
@@ -12,40 +14,30 @@ ttt
 Rango
 {%endblock%}
 
-{##}
-{#{% block secondary_sidebar_base %}#}
-{##}
-{#<link rel="stylesheet" href="{% static '/css/conversations/friends.css' %}">#}
-{#<script src="{% static '/js/conversations/add_friends.js' %}"></script>#}
-{#<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
-{#<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">#}
-{##}
-{##}
-{#<div class="secondary-sidebar">#}
-{##}
-{#    <div id="cats">#}
-{##}
-{#        <h4>Your Friends</h4>#}
-{##}
-{#        {% if friends %}#}
-{#            {% for friend in friends %}#}
-{#                <a class="waves-block waves-effect waves-light secondary-sidebar-friends ">#}
-{#                    <i class="material-icons secondary-sidebar-friends-icon">group</i><span class="">{{friend}}</span>#}
-{#                </a>#}
-{#            {% endfor %}#}
-{#        {% else %}#}
-{#            <p>No Friends Yet</p>#}
-{#        {% endif %}#}
-{##}
-{##}
-{##}
-{#    </div>#}
-{#</div>#}
-{##}
-{#{% endblock %}#}
 
 {% block body_block %}
+
+
+
+
+
+
+
     <div class="container-fluid">
+    {% load filters %}
+    {% load users_on %}
+    {{ users_online }}
+    {% current_time "%Y-%m-%d %I:%M %p" %}
+     {{ 'free' |repl:'e'  }}
+{#        <div class="row">#}
+{#     PARA USO FUTURO       {% load users_online %}#}
+{#            {% user_online %}#}
+{##}
+{#            Place holder tt#}
+{#        </div>#}
+
+
+
         <div class="row">
             <div class="col m4 offset-m1 friends-col">
                 <h2 class="center-align">Remove Friends</h2>
@@ -53,31 +45,19 @@ Rango
 
                     {% for friend_it in friends %}
 
-                          <div class="card blue-grey darken-1 hoverable">
+                          <div class="card blue-grey darken-1 hoverable add-friend">
                             <div class="card-content white-text">
                               <span class="card-title">{{ friend_it.first_name }} {{ friend_it.last_name }}</span>
+
                               <p>Insert small BIO here</p>
                             </div>
                             <div class="card-action">
-                              <a href="#" class="btn-friends"><i class="material-icons" style="vertical-align: middle">mode_comment</i>Message</a>
-                              <a name="id" userid="{{ user.id }}" friendid="{{ friend_it.id }}" class="btn-friends right"><i class="material-icons add" style="vertical-align: middle">close</i>Remove</a>
+                              <a href="#" class="btn-not-friends"><i class="material-icons" style="vertical-align: middle">mode_comment</i>Message</a>
+                                <input id="friend-id" value="{{ friend_it.id }}" hidden="hidden">
+                              <a name="id"  class="btn-not-friends right"><i class="material-icons add" style="vertical-align: middle">close</i>Remove</a>
                             </div>
                           </div>
-
-
-{#                    <div class="row row-friends">#}
-{##}
-{#                        <div class="col m3">#}
-{#                        <a name="id" userid="{{ user.id }}" friendid="{{ friend_it.id }}" class="waves-light btn btn-friends center">#}
-{##}
-{#                        </a>#}
-{#                        </div>#}
-{##}
-{#                        <div class="col m5 friends-name">{{ friend_it.username }}</div>#}
-{##}
-{#                    </div>#}
-
-                {% endfor %}
+                    {% endfor %}
             </div>
             <div class="col m4 offset-m2 friends-col">
                 <h2 class="center-align">Add Friends</h2>
@@ -92,23 +72,11 @@ Rango
                             </div>
                             <div class="card-action">
                               <a href="#" class="btn-friends"><i class="material-icons" style="vertical-align: middle">mode_comment</i>Message</a>
+                                <input id="friend-id" value="{{ friend_it.id }}" hidden="hidden">
                               <a name="id" userid="{{ user.id }}" friendid="{{ friend_it.id }}" class="right btn-friends"><i class="material-icons" style="vertical-align: middle">add_box</i>Add</a>
                             </div>
                           </div>
 
-
-
-{#                    <div class="row row-friends">#}
-{##}
-{##}
-{#                        <div class="col m3">#}
-{#                        <a name="id" userid="{{ user.id }}" friendid="{{ usr.id }}" class=" waves-effect waves-light btn s4 btn-not-friends">#}
-{#                            #}
-{#                        </a>#}
-{#                        </div>#}
-{##}
-{#                        <div class="col m5 friends-name">{{ usr.username }}</div>#}
-{#                    </div>#}
 
                 {% endfor %}
 

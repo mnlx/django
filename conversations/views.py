@@ -3,6 +3,7 @@ from rango.models import User,Friends
 from django.core.urlresolvers import reverse
 from .forms import MessagesForm
 from django.contrib.auth.decorators import login_required
+# from .filters import filters
 import datetime
 # Create your views here.
 @login_required
@@ -32,32 +33,32 @@ def friends(request):
         return HttpResponse(request.POST['id'])
     return render(request, 'conversations/friends.html', {'not_friends':list_friends_excluded,
                                                           'friends': list_friends})
-@login_required
-def add_friends(request):
-
-    # cat_id = None
-    if request.method == 'GET':
-        friend_id = request.GET['friend_id']
-        user_id = request.GET['user_id']
-        user = User.objects.get(pk= int(user_id))
-
-        if friend_id == user_id:
-            return HttpResponse('Forget about it')
-        user.friends_set.get_or_create(friend_id = friend_id).save()
-
-    return HttpResponse('teehee')
-
-def remove_friends(request):
-
-    # cat_id = None
-    if request.method == 'GET':
-        friend_id = request.GET['friend_id']
-        user_id = request.GET['user_id']
-        user = User.objects.get(pk= int(user_id))
-
-        user.friends_set.get_or_create(friend = friend_id)[0].delete()
-
-    return HttpResponse('teehee')
+# @login_required
+# def add_friends(request):
+#
+#     # cat_id = None
+#     if request.method == 'GET':
+#         friend_id = request.GET['friend_id']
+#         user_id = request.GET['user_id']
+#         user = User.objects.get(pk= int(user_id))
+#
+#         if friend_id == user_id:
+#             return HttpResponse('Forget about it')
+#         user.friends_set.get_or_create(friend_id = friend_id).save()
+#
+#     return HttpResponse('teehee')
+#
+# def remove_friends(request):
+#
+#     # cat_id = None
+#     if request.method == 'GET':
+#         friend_id = request.GET['friend_id']
+#         user_id = request.GET['user_id']
+#         user = User.objects.get(pk= int(user_id))
+#
+#         user.friends_set.get_or_create(friend = friend_id)[0].delete()
+#
+#     return HttpResponse('teehee')
 
 def messages(request):
     frd_lst = [i.friend_id for i in request.user.friends_set.all()]

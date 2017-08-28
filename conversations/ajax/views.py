@@ -7,10 +7,12 @@ import datetime
 @login_required
 def add_friends(request):
 
-    # cat_id = None
+
     if request.method == 'GET':
         friend_id = request.GET['friend_id']
-        user_id = request.GET['user_id']
+
+        user = request.user
+        user_id = request.user.id
         user = User.objects.get(pk= int(user_id))
 
         if friend_id == user_id:
@@ -21,13 +23,14 @@ def add_friends(request):
 
 def remove_friends(request):
 
-    # cat_id = None
+
     if request.method == 'GET':
         friend_id = request.GET['friend_id']
-        user_id = request.GET['user_id']
-        user = User.objects.get(pk= int(user_id))
-
-        user.friends_set.get_or_create(friend = friend_id)[0].delete()
+        print(friend_id)
+        user_id = request.user.id
+        print(user_id)
+        # user = User.objects.get(pk= int(user_id))
+        request.user.friends_set.filter(friend_id = friend_id)[0].delete()
 
     return HttpResponse('teehee')
 
