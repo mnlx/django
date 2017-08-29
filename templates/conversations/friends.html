@@ -25,42 +25,33 @@ Rango
 
     <div class="container-fluid">
     {% load filters %}
-    {% load users_on %}
-    {{ users_online }}
-    {% current_time "%Y-%m-%d %I:%M %p" %}
-     {{ 'free' |repl:'e'  }}
-{#        <div class="row">#}
-{#     PARA USO FUTURO       {% load users_online %}#}
-{#            {% user_online %}#}
-{##}
-{#            Place holder tt#}
-{#        </div>#}
+
 
 
 
         <div class="row">
-            <div class="col m4 offset-m1 friends-col">
-                <h2 class="center-align">Remove Friends</h2>
+            <div  class="col m4 offset-m1 friends-col" >
+                <h2 class="center-align row">Remove Friends</h2>
                 <hr>
 
-                    {% for friend_it in friends %}
+                {% for friend_it in friends %}
 
-                          <div class="card blue-grey darken-1 hoverable add-friend">
-                            <div class="card-content white-text">
-                              <span class="card-title">{{ friend_it.first_name }} {{ friend_it.last_name }}</span>
+                      <div class="card blue-grey darken-1 hoverable add-friend">
+                        <div class="card-content white-text">
+                          <span class="card-title">{{ friend_it.first_name }} {{ friend_it.last_name }}</span>
 
-                              <p>Insert small BIO here</p>
-                            </div>
-                            <div class="card-action">
-                              <a href="#" class="btn-not-friends"><i class="material-icons" style="vertical-align: middle">mode_comment</i>Message</a>
-                                <input id="friend-id" value="{{ friend_it.id }}" hidden="hidden">
-                              <a name="id"  class="btn-not-friends right"><i class="material-icons add" style="vertical-align: middle">close</i>Remove</a>
-                            </div>
-                          </div>
-                    {% endfor %}
+                          <p>Insert small BIO here</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="#" class="btn-not-friends"><i class="material-icons" style="vertical-align: middle">mode_comment</i>Message</a>
+                            <input id="friend-id" value="{{ friend_it.id }}" hidden="hidden">
+                          <a name="id"  class="btn-not-friends right"><i class="material-icons" style="vertical-align: middle">close</i>Remove</a>
+                        </div>
+                      </div>
+                {% endfor %}
             </div>
             <div class="col m4 offset-m2 friends-col">
-                <h2 class="center-align">Add Friends</h2>
+                <h2 class="center-align row">Add Friends</h2>
                 <hr>
                 {% for friend_it in not_friends %}
 
@@ -73,7 +64,7 @@ Rango
                             <div class="card-action">
                               <a href="#" class="btn-friends"><i class="material-icons" style="vertical-align: middle">mode_comment</i>Message</a>
                                 <input id="friend-id" value="{{ friend_it.id }}" hidden="hidden">
-                              <a name="id" userid="{{ user.id }}" friendid="{{ friend_it.id }}" class="right btn-friends"><i class="material-icons" style="vertical-align: middle">add_box</i>Add</a>
+                              <a name="id" class="right btn-friends"><i class="material-icons" style="vertical-align: middle">add_box</i>Add</a>
                             </div>
                           </div>
 
@@ -83,7 +74,8 @@ Rango
             </div>
         </div>
     </div>
-
+        {% load users_on %}
+    {% current_time "%Y-%m-%d %I:%M %p" %}
 
 {% endblock %}
 

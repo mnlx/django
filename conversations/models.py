@@ -22,6 +22,7 @@ class Searchy(models.Manager):
 
 class Messages(models.Model):
     mtm = models.ManyToManyField(User)
+
     text = models.CharField(max_length=1000)
     pub_date = models.DateField(null=True)
     sender_id = models.IntegerField(null=True)

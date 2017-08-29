@@ -2,19 +2,27 @@ $(document).ready(
     function(){
         $('.btn-friends').click(
             function(){
-                friend_id = $(this).parent().parent().find('#friend-id').value;
-
+                friend_id = $(this).parent().children('#friend-id')[0].value;
+                console.log(friend_id);
                 $.get(
-                    "{% url 'ajax:add_friends' %}",
+                    '/conversations/ajax/add_friends',
 
                     {'friend_id' : friend_id,
-                            'user_id':user_id},
+                    },
                             function(data){
                                 $(this).html('test');
                             });
-                console.log('added');
 
-            });
+
+                $(this).parent().parent().slideUp();
+
+
+
+
+                });
+
+
+
 
         $('.btn-not-friends').click(
             function(){
@@ -30,6 +38,7 @@ $(document).ready(
                         $(this).html('test');
                     });
                 console.log('removed3');
+                $(this).parent().parent().slideUp();
 
             });
-        });
+    });

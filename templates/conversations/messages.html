@@ -7,54 +7,91 @@
     <script>
   $(document).ready(function() {
     $('select').material_select();
+    $('.collapsible').collapsible();
 
-    $('.friends-container li').click( function(){
 
-        a = $(this).children()[0].value;
-        console.log(a);
-        $('input#friend_id')[0].value = a;
-    });
   });
             </script>
 {% endblock %}
 
 {% block body_block %}
-    <h3>{{ user.username|capfirst }}</h3>
-   <h3>{{ user.username|length }}</h3>
-    <h5>Messages</h5>
-    <ul class="friends-container">
-{% for friend in friends %}
+    <div class="row">
+        <div class="col m3">
+            <div class="collection center">
+            {% for friend in friends %}
+                {% if forloop.counter0 == 0 %}
+                    <a href="#!" class="collection-item active">{{ friend.first_name }} <input type="hidden" hidden="hidden" value="{{ friend.id }}"></a>
+                {% else %}
+                    <a href="#!" class="collection-item">{{ friend.first_name }}<input type="hidden" hidden="hidden" value="{{ friend.id }}"></a>
 
-    <li >{{ friend.first_name }}<input type="hidden" hidden="hidden" value="{{ friend.id }}"> </li>
-
-{% endfor %}
-    </ul>
+                {% endif  %}
 
 
-<form action="{% url 'conversations:messages' %}" method="post">
-    {% csrf_token %}
-    <input id="friend_id" type="hidden" name="friend_id" hidden="hidden" value="{{ friends.0.id }}">
 
-    {% for elem in form %}
-        <div class="row">
-            {% if elem.html_name == 'text' %}
-                <div class="input-field">
-                    {{ elem.errors }}
-                    {{ elem.label_tag }}
-                    <textarea name="{{ elem.html_name }}" rows="10" maxlength="1000" required="" cols="40" id="id_text" class="materialize-textarea"></textarea>
-                </div>
 
-            {% endif %}
+
+
+
+
+            {% endfor %}
+            </div>
         </div>
-    {% endfor %}
-    <input type="submit" value="Submit" class="">
-    {{ form.non_field_errors }}
-</form>
-{% block gogogo %}
-    <h3>Not Working</h3>
-{% endblock %}
+
+        <div class="message-container col m8">
+              <ul class="collapsible" data-collapsible="accordion">
+                  {% for m in msg %}
+
+
+
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">message</i>{{ m.pub_date|date }}</div>
+                  <div class="collapsible-body"><span><p class="text-container">{{ m.text }}</p></span></div>
+                </li>
+
+                  {% endfor %}
+              </ul>
+        </div>
+    </div>
 
 {% endblock %}
+{#    {% for m in msg %}#}
+{#        {{ m.text }}#}
+{#    {% endfor %}#}
+{##}
+{##}
+{##}
+{#    <h3>{{ user.username|capfirst }}</h3>#}
+{#   <h3>{{ user.username|length }}</h3>#}
+{#    <h5>Messages</h5>#}
+{#    <ul class="friends-container">#}
+
+{#    </ul>#}
+{##}
+{##}
+{#<form action="{% url 'conversations:messages' %}" method="post">#}
+{#    {% csrf_token %}#}
+{#    <input id="friend_id" type="hidden" name="friend_id" hidden="hidden" value="{{ friends.0.id }}">#}
+{##}
+{#    {% for elem in form %}#}
+{#        <div class="row">#}
+{#            {% if elem.html_name == 'text' %}#}
+{#                <div class="input-field">#}
+{#                    {{ elem.errors }}#}
+{#                    {{ elem.label_tag }}#}
+{#                    <textarea name="{{ elem.html_name }}" rows="10" maxlength="1000" required="" cols="40" id="id_text" class="materialize-textarea"></textarea>#}
+{#                </div>#}
+{##}
+{#            {% endif %}#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#    <input type="submit" value="Submit" class="">#}
+{#    {{ form.non_field_errors }}#}
+{#</form>#}
+{#{% block gogogo %}#}
+{#    <h3>Not Working</h3>#}
+{#{% endblock %}#}
+{##}
+{#{% endblock %}#}
 
 
 
