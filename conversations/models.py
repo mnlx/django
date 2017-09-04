@@ -27,7 +27,7 @@ class Messages(models.Model):
     pub_date = models.DateField(null=True)
     sender_id = models.IntegerField(null=True)
 
-    objects = Searchy()
+    # objects = Searchy()
 
     def add(self,text, *args, **kwargs):
         # Force to add only two people per message

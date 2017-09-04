@@ -1,0 +1,40 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block head %}
+
+
+<script>
+        $(document).ready(
+    function () {
+        $('.clickmi').click(
+            function () {
+{#               gl = new {1:2};#}
+                console.log(2);
+                $.get({
+                    url: "{% url 'conversations:json' %}",
+                    success: function (data) {
+                        gl = data.foo;
+                        $('.clickmi').html(gl);
+                    }
+
+
+                });
+{#                $(this).html(gl);#}
+            console.log(gl);
+            }
+
+    )}
+);
+
+</script>
+
+{% endblock %}
+
+
+
+
+{% block body_block %}
+<div class="clickmi">Placeholder</div>
+{% endblock %}
+

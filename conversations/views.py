@@ -5,6 +5,7 @@ from .forms import MessagesForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import F,Q
 from conversations.models import Messages
+from django.http import JsonResponse
 # from .filters import filters
 import datetime
 # Create your views here.
@@ -59,3 +60,9 @@ def messages(request):
 
     form['text'].label = 'Message'
     return render(request, 'conversations/messages.html', {'form':form , 'friends':friends[:6], 'msg':msg})
+
+def  json(request):
+    return JsonResponse({'foo':'bar'})
+
+def jsontester(request):
+    return render(request, 'conversations/jsontester.html',{})
