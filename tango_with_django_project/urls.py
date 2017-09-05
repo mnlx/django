@@ -37,5 +37,6 @@ urlpatterns = [
     # url(r'^accounts/register/$', MyRegView.as_view(),name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^conversations/', include('conversations.urls')),
+    url(r'^forms/', include('forms.urls')),
 
 ]
