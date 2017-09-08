@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rango',
     'registration',
     'conversations',
+    'rest_framework',    # adding for the serializing (will use more features later)
     ]
 
 MIDDLEWARE_CLASSES = [

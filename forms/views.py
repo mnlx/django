@@ -1,7 +1,14 @@
 from django.shortcuts import render
 from forms.forms import SurveyForms
 
-from .models import Survey
+from .models import Survey,ChoiceFieldOptions
+from .serializers import FormSerializer
+
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+
 
 # Create your views here.
 
@@ -66,7 +73,15 @@ def survey_create(request):
 
 
 
-
+@csrf_exempt
+def form_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = ChoiceFieldOptions.objects.all()
+        serializer = FormSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 
