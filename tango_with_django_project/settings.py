@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'forms',
+    'forms',            #survey creation app
     'rango',
     'registration',
     'conversations',
     'rest_framework',    # adding for the serializing (will use more features later)
+    'analise', #começando o API de analises da eCentry
     ]
 
 MIDDLEWARE_CLASSES = [

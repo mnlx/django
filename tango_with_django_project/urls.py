@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^conversations/', include('conversations.urls')),
     url(r'^forms/', include('forms.urls')),
-
+    url(r'^analise/', include('analise.urls')),
 ]
 
 

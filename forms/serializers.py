@@ -115,16 +115,21 @@ class ChoiceFieldSerializer(serializers.ModelSerializer):
         model = ChoiceField
         fields = ('id','name', 'identifier','choicefieldoptions_set')
 
-class SurveySerializer(serializers.ModelSerializer):
+class SurveySerializer(serializers.HyperlinkedModelSerializer):
     choicefield_set = ChoiceFieldSerializer(many=True)
     checkfield_set = CheckFieldSerializer(many=True)
     datefield_set = DateFieldSerializer(many=True)
     textfield_set = TextFieldSerializer(many=True, read_only=True)
+    url = serializers.HyperlinkedIdentityField(
+        view_name='forms:survey-detail',
+        lookup_field='pk'
+    )
 
+    # highlight = serializers.HyperlinkedModelSerializer(view_name='survey-list', many=True, read_only=True)
 
     class Meta:
         model = Survey
-        fields = ('id', 'date_created', 'choicefield_set','checkfield_set' ,'datefield_set','textfield_set')
+        fields = ('id','url' ,'date_created', 'choicefield_set','checkfield_set' ,'datefield_set','textfield_set')
 
     def update(self, instance, validated_data):
             # Update the  instance
@@ -180,10 +185,11 @@ class SnippetSerializer(serializers.ModelSerializer):
     #     return instance
 
 
-class UserSerializer(serializers.ModelSerializer):
-    survey_set = serializers.PrimaryKeyRelatedField(many=True, queryset=Survey.objects.all())
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    survey_set = serializers.HyperlinkedRelatedField(many=True,view_name='forms:survey-detail', read_only=True)
 
     owner = serializers.ReadOnlyField(source='owner.username')
+    # users = serializers.HyperlinkedRelatedField(many=True, view_name='user-list', read_only=True)
 
     class Meta:
         model = User

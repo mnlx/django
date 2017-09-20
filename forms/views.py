@@ -7,7 +7,9 @@ from rest_framework.parsers import JSONParser
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import permissions
-
+from rest_framework.reverse import reverse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 def survey_create(request):
     #
@@ -107,6 +109,8 @@ class SurveyDetail(generics.RetrieveUpdateDestroyAPIView):
     # def put(self,*args,**kwargs):
     #     return JsonResponse('test')
 
+from rest_framework import viewsets
+
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -115,3 +119,27 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+
+
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('forms:user-list', request=request, format=format),
+        'survey': reverse('forms:survey-list', request=request, format=format)
+    })
+
+
+from rest_framework import renderers
+from rest_framework.response import Response
+
+class SnippetsHighlight(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = (renderers.StaticHTMLRenderer,)
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
