@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'forms',
     'rango',
     'registration',
     'conversations',
+    'rest_framework',    # adding for the serializing (will use more features later)
     ]
 
 MIDDLEWARE_CLASSES = [
@@ -154,4 +155,8 @@ REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/rango/'
-LOGIN_URL ='/accounts/login/'
+
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}

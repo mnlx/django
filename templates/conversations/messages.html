@@ -12,6 +12,8 @@
 
   });
             </script>
+
+    <script src="{% static '/js/conversations/messages.js' %}"></script>
 {% endblock %}
 
 {% block body_block %}
@@ -20,16 +22,11 @@
             <div class="collection center">
             {% for friend in friends %}
                 {% if forloop.counter0 == 0 %}
-                    <a href="#!" class="collection-item active">{{ friend.first_name }} <input type="hidden" hidden="hidden" value="{{ friend.id }}"></a>
+                    <a href="#!" class="collection-item active friend-bar">{{ friend.first_name }} <input type="hidden" hidden="hidden" value="{{ friend.id }}"></a>
                 {% else %}
-                    <a href="#!" class="collection-item">{{ friend.first_name }}<input type="hidden" hidden="hidden" value="{{ friend.id }}"></a>
+                    <a href="#!" class="collection-item friend-bar">{{ friend.first_name }}<input type="hidden" hidden="hidden" value="{{ friend.id }}"></a>
 
                 {% endif  %}
-
-
-
-
-
 
 
 
